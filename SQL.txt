@@ -23,9 +23,10 @@ CREATE TABLE MaintenanceReport
   cleanliness VARCHAR(50),
   bathroomCondition VARCHAR(50),
   reportDate DATE NOT NULL,
+  maintenanceReportId INT NOT NULL,
   branchId INT NOT NULL,
   employeeId INT NOT NULL,
-  PRIMARY KEY (reportDate, branchId, employeeId),
+  PRIMARY KEY (maintenanceReportId),
   FOREIGN KEY (branchId) REFERENCES Branch(branchId),
   FOREIGN KEY (employeeId) REFERENCES Employee(employeeId)
 );
@@ -35,7 +36,7 @@ CREATE TABLE Equipment
   equipmentName VARCHAR(20),
   equipmentId INT NOT NULL,
   branchId INT NOT NULL,
-  PRIMARY KEY (equipmentId, branchId),
+  PRIMARY KEY (equipmentId),
   FOREIGN KEY (branchId) REFERENCES Branch(branchId)
 );
 
@@ -47,7 +48,7 @@ CREATE TABLE malfunction
   branchId INT NOT NULL,
   auditoriumId INT NOT NULL,
   employeeId INT NOT NULL,
-  PRIMARY KEY (malfunctionId, branchId, auditoriumId, employeeId),
+  PRIMARY KEY (malfunctionId),
   FOREIGN KEY (branchId) REFERENCES Branch(branchId),
   FOREIGN KEY (auditoriumId) REFERENCES Auditorium(auditoriumId),
   FOREIGN KEY (employeeId) REFERENCES Employee(employeeId)
