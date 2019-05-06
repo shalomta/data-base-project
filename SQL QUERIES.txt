@@ -1,10 +1,9 @@
-1.return id of employees that have more than 2 malfuntion
+1.return how many types of equipment are in branches that have more than 5 malfunctions
 
-select distinct employeeId
-from (select * from malfunction natural join employee) l
-where 2< (select count(*)
-          from malfunction m
-          where m.employeeid=l.employeeId)
+select branchId, count(equipmentName)
+from malfunction natural join equipment
+group by branchId
+having count(*)>5
 -------------------------------------------------------------
 2.return id of employees that have more than 1 malfuntions that they didn't fix yet
 
@@ -53,4 +52,22 @@ select b.branchId,
        (select count(*) from malfunction m where m.branchid=b.branchid) as nunOfMalfunctions,
        (select count(*) from maintenancereport m where m.branchid=b.branchid) as numOfMaintenanceReports
 from branch b
+--------------------------------------------------------------
+9. return the id od employees that handled more than 5 maintenance reports and malfunctions in total, and the number of reports and malfunctions they have handled
 
+select distinct employeeId, 
+       (select count(*) from Maintenancereport m1 where e.employeeId=m1.employeeId) as numOfReports,
+       (select count(*) from malfunction m2 where e.employeeId=m2.employeeId) as numOfMalfunctions
+from employee e
+where ((select count(*) from Maintenancereport m1 where e.employeeId=m1.employeeId)+
+      (select count(*) from malfunction m2 where e.employeeId=m2.employeeId)) > 5  
+---------------------------------------------------------------
+10.return the id of branches that have more 10 pieces of equipment or that had more than 5 malfunctions
+
+select branchId
+from Branch b1
+where 10 < (select count(*) from equipment e2 where b1.branchId=e2.branchId)
+union 
+select branchId
+from Branch b2
+where 5 < (select count(*) from malfunction e2 where b2.branchId=e2.branchId)
