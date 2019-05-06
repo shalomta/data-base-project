@@ -44,11 +44,11 @@ CREATE TABLE malfunction
 (
   malfunctionId INT NOT NULL,
   description VARCHAR(200),
-  isFixed INT NOT NULL,
+  isFixed VARCHAR(5) NOT NULL CHECK (isFixed='YES' OR isFixed='NO'),
   branchId INT NOT NULL,
   auditoriumId INT NOT NULL,
   employeeId INT NOT NULL,
-  PRIMARY KEY (malfunctionId),
+  PRIMARY KEY (malfunctionId, branchId, auditoriumId, employeeId),
   FOREIGN KEY (branchId) REFERENCES Branch(branchId),
   FOREIGN KEY (auditoriumId) REFERENCES Auditorium(auditoriumId),
   FOREIGN KEY (employeeId) REFERENCES Employee(employeeId)
