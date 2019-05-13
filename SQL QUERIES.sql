@@ -43,8 +43,7 @@ from malfunction natural join branch
 group by branchId
 -------------------------------------------------------------
 --7.return the id and the count of malfunctios in branches that have more than 5 pieces of equipment and at least one malfunction 
--- מחזיר את מספרי הזיהוי ואת כמות התקלות של סניפים שיש להם יותא מחמש יחידות של ציוד וגם שיש בהם לפחות תקלה אחת
-
+--מחזיר את מספרי הזיהוי ואת כמות התקלות של סניפים שיש להם יותר מחמש יחידות של ציוד וגם שיש בהם לפחות תקלה אחת
 select branchId, count(*)
 from (select * from malfunction natural join branch) m
 group by branchId
