@@ -1,0 +1,48 @@
+--functions
+--1.
+create or replace function equipment_in_city(city_name in string)
+return number is
+num_of_equipment number;
+begin
+  select count(*)
+  into num_of_equipment 
+  from equipment e natural join branch b natural join city c
+  where c.cityname=city_name;
+  
+  return(num_of_equipment);
+  end equipment_in_city; 
+
+--2.
+create or replace function employees_in_city(city_name in string)
+return number is
+num_of_employees number;
+begin
+  select count(*)
+  into num_of_employees 
+  from (select distinct m.employeeid
+        from malfunction m natural join branch b natural join city c
+        where c.cityname=city_name) t;
+  
+  return(num_of_employees);
+  end employees_in_city;
+
+--procedures
+--1.
+create or replace procedure reassign_malfunction(maulfunction_id number, employee_id number)
+is
+begin
+  update malfunction
+  set employeeid=employee_id
+  where malfunctioid=malfunction_id
+
+  end reassign_malfunction;
+
+2.
+create or replace procedure fixed_branch_malfunctions(branch_id number)
+is
+
+begin
+  update malfunction set
+  isfixed='YES'
+  where branchid=branch_id;
+end fixed_branch_malfunctions;

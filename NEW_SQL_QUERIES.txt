@@ -1,0 +1,14 @@
+1.
+select distinct cityname
+from malfunction m natural join city c
+where (select count(*) from malfunction m1 natural join city c1 where c1.cityid=c.cityid)
+      > (select count(*) from maintenancereport m2 natural join city c2 where c2.cityid=c.cityid)
+
+2.
+select cityname, count(malfunctionid) as malfunctions_to_fix 
+from malfunction natural join branch natural join city
+where isfixed='NO'
+group by cityname
+order by count(malfunctionid) desc
+
+3.

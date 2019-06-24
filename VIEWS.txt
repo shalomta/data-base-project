@@ -1,0 +1,35 @@
+1.
+create view maintenancereport_sean_view as
+select * 
+from maintenancereport m natural join branch b natural join city c
+where c.cityname='Sean'
+
+2.
+create view maintenancereport_rod_view as
+select * 
+from maintenancereport m natural join branch b natural join city c
+where c.cityname='Rod'
+
+3.
+create view branchaddressview as
+select b.branchname, b.branchaddress, c.cityname, a.areacountry
+from branch b natural join city c natural join area a
+where a.areacountry='Japan'
+
+4.
+create view branchaddressview as
+select b.branchname, b.branchaddress, c.cityname, a.areacountry
+from branch b natural join city c natural join area a
+where a.areacountry='USA'
+
+5.
+create view malfunction_sean_view as
+select * 
+from malfunction m natural join branch b natural join city c
+where c.cityname='Sean'
+
+6.
+create view malfunction_Rod_view as
+select * 
+from malfunction m natural join branch b natural join city c
+where c.cityname='Rod'
